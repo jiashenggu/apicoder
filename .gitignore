@@ -1,0 +1,4 @@
+data/*
+APIRetriever/data/*
+*.pyc
+*.egg-info
