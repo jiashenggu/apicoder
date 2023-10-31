@@ -58,7 +58,8 @@ def remove_samples_in_comments(prompt: str) -> str:
 
 def create_model(ckpt, fp16=True):
     if fp16:
-        return CodeGenForCausalLM.from_pretrained(ckpt, revision='float16', torch_dtype=torch.float16, low_cpu_mem_usage=True)
+        # return CodeGenForCausalLM.from_pretrained(ckpt, revision='float16', torch_dtype=torch.float16, low_cpu_mem_usage=True)
+        return CodeGenForCausalLM.from_pretrained(ckpt, revision='float16')
     else:
         return CodeGenForCausalLM.from_pretrained(ckpt)
 
@@ -90,8 +91,8 @@ def load_generation_pipe(model_name_or_path: str, gpu_device: int=0):
         'text-generation',
         model=model,
         tokenizer=tokenizer,
-        # device=gpu_device
-        device_map="auto"
+        device=gpu_device
+        # device_map="auto"
     )
 
     print("load generation pipeline from {} over, vocab size = {}, eos id = {}, gpu device = {}.".format(

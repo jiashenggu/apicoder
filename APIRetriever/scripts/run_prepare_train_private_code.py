@@ -10,7 +10,7 @@ import sys
 # -------------------------------------------------------------------------------------------------
 # you need to change this path to your own `APICoder-CodeGenAPI` path, better to use absolute path
 # -------------------------------------------------------------------------------------------------
-sys.path.append('../../../CodeGenAPI/')
+sys.path.append('/home/yz979/code/apicoder/CodeGenAPI')
 from scripts.get_libs_info_from_code import (
     get_dict_of_api_name_lib_api_paths,
     get_dict_of_api_path_api_signature_and_api_desp,
@@ -21,7 +21,7 @@ from scripts.get_libs_info_from_code import (
 # -------------------------------------------------------------------------------------------------
 # your need to change this path to the path of your `crawl_code` path, better to use absolute path
 # -------------------------------------------------------------------------------------------------
-YOUR_CRAWLED_API_PATH = "PrivateLibrary/data/API-Doc"
+YOUR_CRAWLED_API_PATH = "/home/yz979/code/apicoder/data/API-Doc"
 api_path_api_signature_and_api_desp = get_dict_of_api_path_api_signature_and_api_desp(
     YOUR_CRAWLED_API_PATH, 
     "pandas,numpy,monkey,beatnum,torchdata", 
@@ -36,7 +36,7 @@ parser = ArgumentParser()
 parser.add_argument('--input', type=str, default="PrivateLibrary/APIRetriever/data/train/unprocessed-train-data", help="each jsonl file in such path contains many json lines, where each line's format is {'code_doc': '', 'positive_APIs': ['A', ...], 'negative_APIs': ['B', ...]}")
 parser.add_argument('--data_mode', type=str, default="", help="the prefix of the input jsonl file, default is empty")
 parser.add_argument('--output', type=str, default="PrivateLibrary/APIRetriever/data/train/processed-train-data", help="the output path")
-parser.add_argument('--tokenizer', type=str, required=False, default='/your/path/of/bert-base-uncased')
+parser.add_argument('--tokenizer', type=str, required=False, default='bert-base-uncased')
 
 args = parser.parse_args()
 

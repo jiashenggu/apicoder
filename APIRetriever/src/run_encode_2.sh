@@ -8,7 +8,7 @@ for MODE in ${MODES[@]}; do
   for LIBRARY in ${LIBRIES[@]}; do
     echo "Library: $LIBRARY"
     OUTDIR="../data/inference"
-    MODEL_DIR="../outputs/APIRetrieverCheckPoint/"
+    MODEL_DIR="bert-base-uncased"
     CORPUS_DIR="../data/inference"
     ENCODE_DIR="../data/inference"
     PER_BATCH_SIZE=50

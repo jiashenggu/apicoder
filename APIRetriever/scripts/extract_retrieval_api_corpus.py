@@ -16,17 +16,19 @@ from func_timeout import func_timeout, FunctionTimedOut
 
 import sys
 # ------------------------------------------------------------------------------------------------
-sys.path.append("your/absolute/path/of/.../APICoder-CodeGenAPI/scripts") # must be absolute path
+sys.path.append("/home/yz979/code/apicoder/CodeGenAPI/scripts") # must be absolute path
 # ------------------------------------------------------------------------------------------------
 from file_utils import get_files, read_lines, load_githup_stars_dict, Data_Abs_Dir
 from multiprocessing_utils import MultiprocessingArgs, run_with_multiprocessing
 from ast_utils import *
-from codegen_tokenization import create_custom_gpt2_tokenizer, create_model
+# from codegen_tokenization import create_custom_gpt2_tokenizer, create_model
+
 from get_libs_info_from_code import * # contain `craft_code_context_and_doc_pairs` function
 
 # ------------------------------------------------------------------------------------------------
-sys.path.append("your/absolute/path/of/.../APICoder-CodeGenAPI") # must be absolute path
+sys.path.append("/home/yz979/code/apicoder/CodeGenAPI") # must be absolute path
 # ------------------------------------------------------------------------------------------------
+from eval_private import create_custom_gpt2_tokenizer, create_model
 from nl2code import load_pretrained_tokenizer, resolve_model_name_or_path
 
 import logging
