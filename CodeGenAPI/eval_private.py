@@ -12,8 +12,9 @@ from tqdm import tqdm
 # from human_eval.data import write_jsonl, read_problems
 from private_eval.data import read_problems, write_jsonl
 from nl2code.modeling_codegen import CodeGenForCausalLM
+from openai_api import OpenAIClient
 
-
+openai_client = OpenAIClient()
 device = torch.device('cpu') if not torch.cuda.is_available() else torch.device('cuda')
 torch.set_num_threads(16)
 
@@ -109,12 +110,24 @@ def complete_code(pipe, prompt, num_completions=1, **gen_kwargs):
     """Complete prompt with text generation pipeline and return num_completions."""
     set_seed(123)
 
-    code_gens = pipe(prompt,
-        num_return_sequences=num_completions,
-        **gen_kwargs
+    # code_gens = pipe(prompt,
+    #     num_return_sequences=num_completions,
+    #     **gen_kwargs
+    # )
+    messages = [
+        {"role": "system", "content": "You are a helpful code assistant."},
+        {"role": "user", "content": prompt.strip("<|endoftext|>")},
+    ]
+    # breakpoint()
+    response = openai_client.oa_chat_completion(
+        model="gpt-3.5-turbo",
+        messages=messages,
     )
+    code_gen =  response["choices"][0]["message"]["content"]
 
-    return [first_block(code_gen["generated_text"][len(prompt):]) for code_gen in code_gens]
+    # return [first_block(code_gen["generated_text"][len(prompt):]) for code_gen in code_gens]
+    return [first_block(code_gen) for _ in range(num_completions)]
+
 
 def evaluate_on_human_eval(
     model_name_or_path: str,
@@ -181,6 +194,7 @@ def evaluate_on_human_eval(
         prompt = problems[task_id]["prompt"].strip()
         for _ in range(num_samples_per_task // generate_batch_size):
             input_prompt = bos_token + prompt
+            # breakpoint()
             gen_results = complete_code(pipe, input_prompt, num_completions=generate_batch_size, **gen_kwargs)
             for gen_result in gen_results:
                 samples.append(dict(task_id=task_id, completion=gen_result))
