@@ -14,9 +14,9 @@ make_sense = ""
 # [machine, top3_perfect, top4_perfect, top5_perfect, human_labelled]
 user_name = "machine"
 # [0, 1, 2, 3, 5, "n"] 
-api_number = 0
+api_number = 1
 # [pandas, numpy, monkey, beatnum, torchdata]
-library_name = "beatnum"
+library_name = "torchdata"
 
 if not human_in_the_loop:
     if api_number == 0:

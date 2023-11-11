@@ -1,5 +1,5 @@
 #!/bin/bash
-
+export CUDA_VISIBLE_DEVICES=3
 # [True, False]
 HUMAN_IN_THE_LOOP="False"
 # ["_no", "_make_sense"]
@@ -7,12 +7,12 @@ MAKE_SENSE="_no"
 # [machine, top3_perfect, top4_perfect, top5_perfect, human_labelled]
 USER_NAME="machine"
 # [0, 1, 2, 3, 5, "n"]
-API_NUMBER=0
+API_NUMBER=1
 # [Pandas, Numpy, Monkey, BeatNum, TorchData]
-DOMAIN="BeatNum"
+DOMAIN="TorchData"
 # [CodeGen, API_Coder] [codet5, CodeGPT, CodeClippy, CodeParrot]
 MODEL_VERSION="API_Coder"
-TEMP=0.2
+TEMP=0.1
 
 BASE_DIR="/home/yz979/code/apicoder/data/CodeGenAPI"
 
@@ -25,7 +25,7 @@ if [ ${MODEL_VERSION} == "CodeGen" ]; then
     echo "Run Args: $Run_Args"
     python eval_private.py ${Run_Args}
 elif [ ${MODEL_VERSION} == "API_Coder" ]; then
-    NUM_SAMPLES="200"
+    NUM_SAMPLES="100"
     MAX_TOKNES="100"
     TOP_P="0.9"
     CKPT_NAME="${BASE_DIR}/CodeGenAPI-350M-mono"
